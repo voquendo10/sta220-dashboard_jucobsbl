@@ -20,6 +20,6 @@ college_scorecard_nj <- college_scorecard_nj |>
                       "New Jersey Institute of Technology",          # not in njac
                       "Stockton University",
                       "William Paterson University of New Jersey",
-                      "Thomas Edison State University",              # not in njac
                       "Ramapo College of New Jersey",
-                      "New Jersey City University"))
+                      "New Jersey City University")
+  )
