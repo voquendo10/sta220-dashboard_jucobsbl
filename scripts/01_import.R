@@ -27,3 +27,13 @@ college_scorecard_nj <- college_scorecard_nj |>
                       "Ramapo College of New Jersey",
                       "New Jersey City University")
   )
+
+# filter to columns you will need
+
+# import individual data
+indiv_stats <- read_csv("data/individual_stats_11-2-2026.csv")
+
+# data set did not include NJCU
+indiv_pitcher_info <- read_csv("data/individual_info_11-2-2026.csv")
+
+# join individual datasets to get all players info + stats for NJAC
