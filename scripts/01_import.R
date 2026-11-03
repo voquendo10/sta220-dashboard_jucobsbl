@@ -1,8 +1,10 @@
 # Packages ---------------------------------------------------------------------
 
-# install.packages("tidyverse")
+install.packages(c("tidyverse", "baseballr", "chromote"))
 
 library(tidyverse)
+library(baseballr)
+library(chromote)
 
 # Import Data ------------------------------------------------------------------
 
