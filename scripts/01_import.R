@@ -3,11 +3,9 @@
 # ------------------------------------------------------------------------------
 
 # uncomment install.packages() to download packages
-# install.packages(c("tidyverse", "baseballr", "chromote"))
+# install.packages("tidyverse")
 
 library(tidyverse)
-library(baseballr)
-library(chromote)
 
 # ------------------------------------------------------------------------------
 # Import Data
