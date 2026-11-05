@@ -2,7 +2,8 @@
 # Packages
 # ------------------------------------------------------------------------------
 
-install.packages(c("tidyverse", "baseballr", "chromote"))
+# uncomment install.packages() to download packages
+# install.packages(c("tidyverse", "baseballr", "chromote"))
 
 library(tidyverse)
 library(baseballr)
@@ -20,7 +21,7 @@ dim(college_scorecard)
 names(college_scorecard)
 summary(college_scorecard)
 
-# Import individual data ---------------------------------
+# Import NCAA individual data ---------------------------------
 # expect 27470 rows, 25 columns
 indiv_stats <- read_csv("data/individual_stats_11-2-2026.csv")
 
@@ -35,5 +36,7 @@ dim(indiv_pitcher_info)
 names(indiv_pitcher_info)
 summary(indiv_pitcher_info)
 
-
+# Import NJCAA individual data --------------------------------
+# missing several njcaa schools baseball stats (not a result of data collection, but of actual missing data)
+njcaa_players_2024_2025 <- read_csv("data/njcaa_2024_2025_pitching_11-3-2026.csv")
 

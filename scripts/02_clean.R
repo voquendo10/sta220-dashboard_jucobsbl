@@ -82,9 +82,13 @@ indiv_stats |> anti_join(indiv_pitcher_info, join_by(athlete_id)) # returns 27,3
 
 # === check 3 - left join stats (right table) to info (left table) by athlete_id ===
 # expect 161 rows, 45 columns (some columns will repeat (col.x, col.y))
-njac_pitchers <- indiv_pitcher_info |>
+njac_pitchers_2025_2026 <- indiv_pitcher_info |>
   left_join(indiv_stats, by = "athlete_id")
 
-dim(njac_pitchers)
-names(njac_pitchers)
-summary(njac_pitchers)
+dim(njac_pitchers_2025_2026)
+names(njac_pitchers_2025_2026)
+summary(njac_pitchers_2025_2026)
+
+# select wanted columns
+
+# join njcaa with njac
