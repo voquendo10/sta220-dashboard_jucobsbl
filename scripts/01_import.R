@@ -47,3 +47,10 @@ summary(njcaa_players_2024_2025)
 names(njcaa_players_2024_2025) <- names(njcaa_players_2024_2025) |>
   str_to_lower() |>
   str_replace_all("\\s+", "_")
+
+# Import NJAC Pitching Totals =============================
+njac_pitching_totals <- read_csv("data/pitching_totals_11-2-2026.csv")
+
+dim(njac_pitching_totals)
+names(njac_pitching_totals)
+summary(njac_pitching_totals)
