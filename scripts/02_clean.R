@@ -1,7 +1,7 @@
-# ------------------------------------------------------------------------------
+# ==============================================================================
 # Filtering
-# ------------------------------------------------------------------------------
-# filter only baseball NJAC colleges/universities
+# ==============================================================================
+# filter only baseball NJAC colleges/universities ==============================
 # expect 10 rows, 3379 columns
 college_scorecard_njac <- college_scorecard |> 
   filter(INSTNM %in% c("Rowan University",
@@ -18,7 +18,7 @@ college_scorecard_njac <- college_scorecard |>
 
 dim(college_scorecard_njac)
 
-# select necessary columns
+# select necessary columns =============================
 college_scorecard_njac <- college_scorecard_njac |>
   select(
     # Institutional Context
@@ -65,9 +65,9 @@ college_scorecard_njac <- college_scorecard_njac |>
 # check names
 names(college_scorecard_njac)
 
-# ------------------------------------------------------------------------------
+# ==============================================================================
 # Join Individual Player Data Sets
-# ------------------------------------------------------------------------------
+# ==============================================================================
 # === check 1 - key verification ===
 names(indiv_pitcher_info)
 names(indiv_stats)
@@ -80,7 +80,7 @@ indiv_stats |> count(athlete_id) |> filter(n > 1)         # returns 0 - athlete_
 indiv_pitcher_info |> anti_join(indiv_stats, join_by(athlete_id)) # returns 18 - on the roster, but no stats (injured, doesn't meet grade requirements, etc.)
 indiv_stats |> anti_join(indiv_pitcher_info, join_by(athlete_id)) # returns 27,327 - pitcher_info table is only njac players, all 27,327 players are outside the njac!
 
-# === check 3 - left join stats (right table) to info (left table) by athlete_id ===
+# === left join stats (right table) to info (left table) by athlete_id ===
 # expect 161 rows, 45 columns (some columns will repeat (col.x, col.y))
 njac_pitchers_2025_2026 <- indiv_pitcher_info |>
   left_join(indiv_stats, by = "athlete_id")
@@ -90,7 +90,6 @@ names(njac_pitchers_2025_2026)
 summary(njac_pitchers_2025_2026)
 
 # select wanted columns
-
 njac_pitchers_2025_2026 <- njac_pitchers_2025_2026 |>
   select(
     athlete_id,
@@ -107,10 +106,21 @@ njac_pitchers_2025_2026 <- njac_pitchers_2025_2026 |>
     strikeouts = k
   )
 
-# join njcaa with njac
+names(njac_pitchers_2025_2026)
 
+# join njcaa with njac --- help with gemini
+njcaa_prep <- njcaa_players_2024_2025 |>
+  mutate(clean_name = str_to_lower(str_squish(player)), .after = player)
 
+njac_prep <- njac_pitchers_2025_2026 |>
+  mutate(clean_name = str_to_lower(str_squish(paste(first_name, last_name))), .after = last_name)
 
+transfers <- njcaa_prep |>
+  inner_join(
+    njac_prep,
+    join_by(clean_name),
+    suffix = c("_njcaa", "_njac")
+  )
 
 
 
