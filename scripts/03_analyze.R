@@ -1,3 +1,7 @@
+# ------------------------------------------------------------------------------
+# Financial Visualizations
+# ------------------------------------------------------------------------------
+
 # ==============================================================================
 # Net Price vs. Median Amount Earned After 5 Years
 # ==============================================================================
@@ -5,7 +9,7 @@
 college_scorecard_njac_v1 <- college_scorecard_njac |>
   mutate(
     avg_net_price   = as.numeric(as.character(avg_net_price)),   # as.character in case variables were imported as "factor" type
-    median_earn_5yr = as.numeric(as.character(median_earn_5yr))
+    median_earn_5yr = as.numeric(as.character(median_earn_5yr))  # i.e. if value was factor level 1, as.numeric turns value to 1
   )
 
 # 2. Calculate mean or median benchmark reference lines for quadrants
@@ -33,24 +37,35 @@ p1 <- ggplot(college_scorecard_njac_v1, aes(x = avg_net_price, y = median_earn_5
 # save plot to output directory
 ggsave("output/net_price_vs_5yr_earn.png", plot = p1)
 
+# ------------------------------------------------------------------------------
+# Baseball Visualizations
+# ------------------------------------------------------------------------------
+
 # ==============================================================================
 # Team-Level NJAC Pitching Stats
 # ==============================================================================
-# get era of njac
+# 1. Get ERA of NJAC (Total NJAC earned runs * 9 / total NJAC innings pitched)
 njac_era <- (sum(njac_pitching_totals$er) * 9) / sum(njac_pitching_totals$ip)
 
+# 2. Create bar chart of each team ERA, with NJAC ERA
 p2 <- ggplot(njac_pitching_totals, aes(x = era, y = fct_rev(fct_reorder(school, era)))) +
   # create the bar chart
   geom_col() +
   # add vertical line of avg era of njac
   geom_vline(xintercept = njac_era, linetype = "dashed") +
   labs(
-    title = "Team Pitching Staff ERA across the NJAC",
+    title = "Kean, Rowan, Montclair State Among the Best Team Pitching Staff across the NJAC",
     subtitle = "Dashed line represents conference average ERA",
-    x = "Mean Earned Run Average (ERA)",
+    x = "Team Earned Run Average (ERA)",
     y = "NJAC School",
     caption = "Source: The Baseball Cube"
   ) +
   theme_minimal()
 
 ggsave("output/team_era_njac.png", plot = p2)
+
+# ==============================================================================
+# Strikeout to Walk Ratio
+# ==============================================================================
+
+# 1. Plot the ratio, with a regression line
