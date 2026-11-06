@@ -43,8 +43,19 @@ dim(njcaa_players_2024_2025)
 names(njcaa_players_2024_2025)
 summary(njcaa_players_2024_2025)
 
+# NJCAA data last 3 years
+njcaa_players_3yr <- read_csv("data/NJCAA_3_Years_Pitching.csv")
+
+dim(njcaa_players_3yr)
+names(njcaa_players_3yr)
+summary(njcaa_players_3yr)
+
 # clean njcaa table variable names to lower_snake_case
 names(njcaa_players_2024_2025) <- names(njcaa_players_2024_2025) |>
+  str_to_lower() |>
+  str_replace_all("\\s+", "_")
+
+names(njcaa_players_3yr) <- names(njcaa_players_3yr) |>
   str_to_lower() |>
   str_replace_all("\\s+", "_")
 
@@ -54,3 +65,4 @@ njac_pitching_totals <- read_csv("data/pitching_totals_11-2-2026.csv")
 dim(njac_pitching_totals)
 names(njac_pitching_totals)
 summary(njac_pitching_totals)
+
