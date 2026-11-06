@@ -91,4 +91,27 @@ summary(njac_pitchers_2025_2026)
 
 # select wanted columns
 
+njac_pitchers_2025_2026 <- njac_pitchers_2025_2026 |>
+  select(
+    athlete_id,
+    first_name = first_name.x,
+    last_name = last_name.x,
+    athletic_year,
+    conference,
+    school,
+    innings_pitched = ip,
+    era,
+    wins = w,
+    loses = l,
+    saves = sv,
+    strikeouts = k
+  )
+
 # join njcaa with njac
+
+
+
+
+
+
+
