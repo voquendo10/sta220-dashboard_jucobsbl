@@ -32,3 +32,25 @@ p1 <- ggplot(college_scorecard_njac_v1, aes(x = avg_net_price, y = median_earn_5
 
 # save plot to output directory
 ggsave("output/net_price_vs_5yr_earn.png", plot = p1)
+
+# ==============================================================================
+# Team-Level NJAC Pitching Stats
+# ==============================================================================
+# get era of njac
+njac_era <- (sum(njac_pitching_totals$er) * 9) / sum(njac_pitching_totals$ip)
+
+p2 <- ggplot(njac_pitching_totals, aes(x = era, y = fct_rev(fct_reorder(school, era)))) +
+  # create the bar chart
+  geom_col() +
+  # add vertical line of avg era of njac
+  geom_vline(xintercept = njac_era, linetype = "dashed") +
+  labs(
+    title = "Team Pitching Staff ERA across the NJAC",
+    subtitle = "Dashed line represents conference average ERA",
+    x = "Mean Earned Run Average (ERA)",
+    y = "NJAC School",
+    caption = "Source: The Baseball Cube"
+  ) +
+  theme_minimal()
+
+ggsave("output/team_era_njac.png", plot = p2)
