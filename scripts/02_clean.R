@@ -95,7 +95,7 @@ njac_pitchers_2025_2026 <- njac_pitchers_2025_2026 |>
     athlete_id,
     first_name = first_name.x,
     last_name = last_name.x,
-    athletic_year,
+    njac_year = athletic_year,
     conference,
     school,
     innings_pitched = ip,
@@ -108,20 +108,41 @@ njac_pitchers_2025_2026 <- njac_pitchers_2025_2026 |>
 
 names(njac_pitchers_2025_2026)
 
-# join njcaa with njac --- help with gemini
-njcaa_prep <- njcaa_players_2024_2025 |>
-  mutate(clean_name = str_to_lower(str_squish(player)), .after = player)
+# ==============================================================================
+# Join NJAC pitchers with NJCAA Players to find Transfers
+# ==============================================================================
+# clean names to create a key
+njcaa_prep <- njcaa_players_3yr |>
+  mutate(clean_name = str_remove_all(str_to_lower(str_squish(player)), "\\."), .after = player)
+
+# select wanted columns (same names as njac table)
+njcaa_prep <- njcaa_prep |>
+  select(
+    athlete_id = player_id,
+    clean_name,
+    juco_year = season,
+    school = team,
+    innings_pitched = ip,
+    era,
+    wins = w,
+    loses = l,
+    saves = sv,
+    strikeouts = so
+  )
 
 njac_prep <- njac_pitchers_2025_2026 |>
   mutate(clean_name = str_to_lower(str_squish(paste(first_name, last_name))), .after = last_name)
 
+# === check 2 - anti joins ===
+njcaa_prep |> anti_join(njac_prep, by = "clean_name") # players in NJCAA from 2022-2023 to 2024-2025 who are not on a NJAC roster in 2025-2026
+njac_prep |> anti_join(njcaa_prep, by = "clean_name") # players in NJAC who did not play in NJCAA in any of the 3 seasons prior to 2025-2026
+
+# === inner join to find transfers ===
 transfers <- njcaa_prep |>
   inner_join(
     njac_prep,
     join_by(clean_name),
     suffix = c("_njcaa", "_njac")
   )
-
-
 
 
