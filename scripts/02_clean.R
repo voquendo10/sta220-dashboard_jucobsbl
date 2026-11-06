@@ -1,5 +1,5 @@
 # ==============================================================================
-# Filtering
+# Narrowing College Scorecard
 # ==============================================================================
 # filter only baseball NJAC colleges/universities ==============================
 # expect 10 rows, 3379 columns

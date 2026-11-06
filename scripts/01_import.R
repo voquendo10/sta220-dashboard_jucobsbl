@@ -59,7 +59,7 @@ names(njcaa_players_3yr) <- names(njcaa_players_3yr) |>
   str_to_lower() |>
   str_replace_all("\\s+", "_")
 
-# Import NJAC Pitching Totals =============================
+# Import All NJAC Pitching Totals =============================
 njac_pitching_totals <- read_csv("data/pitching_totals_11-2-2026.csv")
 
 dim(njac_pitching_totals)
