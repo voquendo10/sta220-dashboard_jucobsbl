@@ -2,8 +2,8 @@
 # Packages
 # ==============================================================================
 
-# uncomment install.packages() to download packages
-install.packages(c("tidyverse", "sf"))
+# un-comment install.packages() to download packages
+# install.packages(c("tidyverse", "sf"))
 
 library(tidyverse)
 library(sf)
