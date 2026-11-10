@@ -18,14 +18,14 @@ mean_earn  <- mean(college_scorecard_njac_v1$median_earn_5yr, na.rm = TRUE)
 
 # 3. Build the quadrant scatter plot
 p1 <- ggplot(college_scorecard_njac_v1, aes(x = avg_net_price, y = median_earn_5yr)) +
-  # create scatterplot
+  # create scatter plot
   geom_point() +
   # add 4 quadrants using mean price and mean earn
   geom_vline(xintercept = mean_price, linetype = "dashed") +
   geom_hline(yintercept = mean_earn, linetype = "dashed") +
   # add names to points
   geom_text(aes(label = institution_name), vjust = -0.7, size = 2.5) +
-  # add ltitles, labels, caption
+  # add titles, labels, caption
   labs(
     title = "Net Price vs. 5-Year Alumni Earnings at NJAC Institutions",
     subtitle = "Dashed lines represent 2025-2026 averages for quadrant division",
