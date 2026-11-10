@@ -16,6 +16,7 @@ college_scorecard_njac <- college_scorecard |>
                        "New Jersey City University")
   )
 
+# check dimensions
 dim(college_scorecard_njac)
 
 # select necessary columns =============================
@@ -85,6 +86,7 @@ indiv_stats |> anti_join(indiv_pitcher_info, join_by(athlete_id)) # returns 27,3
 njac_pitchers_2025_2026 <- indiv_pitcher_info |>
   left_join(indiv_stats, by = "athlete_id")
 
+# three checks
 dim(njac_pitchers_2025_2026)
 names(njac_pitchers_2025_2026)
 summary(njac_pitchers_2025_2026)
@@ -107,6 +109,18 @@ njac_pitchers_2025_2026 <- njac_pitchers_2025_2026 |>
   )
 
 names(njac_pitchers_2025_2026)
+
+# === add NJCU pitchers to NJAC pitcher data ===
+njac_pitchers_2025_2026 <- njac_pitchers_2025_2026 |>
+  bind_rows(njcu_pitchers_2025_2026)
+
+# expect 16 new rows -> 161 + 16 = 177 rows, 12 columns
+# three checks
+dim(njac_pitchers_2025_2026)
+names(njac_pitchers_2025_2026)
+summary(njac_pitchers_2025_2026)
+
+
 
 # ==============================================================================
 # Join NJAC pitchers with NJCAA Players to find Transfers
@@ -144,5 +158,10 @@ transfers <- njcaa_prep |>
     join_by(clean_name),
     suffix = c("_njcaa", "_njac")
   )
+
+# three checks
+dim(transfers)
+names(transfers)
+summary(transfers)
 
 
