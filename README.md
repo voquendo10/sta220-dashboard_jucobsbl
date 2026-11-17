@@ -8,6 +8,14 @@ This project contains several different data sources.
 3. Individual Info data is athlete roster data for the NJAC 2025-26 year. The data is missing the data for New Jersey City University. The data comes from Hugging Face (compiled by Dharit Shah, CC0 1.0 public domain license). The data was downloaded November 2nd, 2026. The link is: [Individual Info](https://huggingface.co/datasets/dharits3/ncaa-college-athlete-rosters-2025-26/viewer?views%5B%5D=default_full&views%5B%5D=baseball&sql=--+The+SQL+console+is+powered+by+DuckDB+WASM+and+runs+entirely+in+the+browser.%0A--+Get+started+by+typing+a+query+or+selecting+a+view+from+the+options+below.%0ASELECT+*%0AFROM+default_full+%0AWHERE+sport+%3D+%27baseball%27%0A++AND+conference+%3D+%27New+Jersey+Athletic+Conference%27%3B)
 4. Individual Stats data is athlete statistics for the NJAC 2025-26 year. The data comes from Hugging Face (compiled by Dharit Shah, CC0 1.0 public domain license). The data was downloaded November 2nd, 2026. The link is: [Individual Stats](https://huggingface.co/datasets/dharits3/ncaa-college-athlete-rosters-2025-26/raw/main/by_sport/baseball/stats.csv)
 5. NJCU Pitcher data is pitcher data for NJCU pitchers in the 2025-26 year. This data was manually compiled using the NJCU baseball statistics website. The data was compiled in Google sheets. Each column was named exactly as the columns kept and used in the join between the Individual Info and Individual Stats datasets. The data was compiled and downloaded on November 9th, 2026. The link is: [NJCU Pitchers](https://njacsports.com/teamstats.aspx?path=baseball&year=2026&school=njcu). Optional: Click the "PITCHING" tab at the top to only show pitching stats.
+6. Region 19 Pitcher Statistics 2023-24 is pitcher data for each school in Region 19 of the NJCAA (JUCO). This data was manually compiled from The Baseball Cube. The data was compiled and downloaded November 16th, 2026. The link is: [Region 19 Pitcher Statistics 2023-24](https://www.thebaseballcube.com/content/college_summary/2024~NJCAA-Reg19/). The data was compiled in the following manner:
+    1. Click each school
+    2. Scroll to "Pitching Statistics"
+    3. Click "CSV"
+    4. Copy the text into Notepad on windows
+    5. Repeat for each school. Note: Only the first school included the header row. No school included the totals row
+    6. Download the Notepad text as a .csv file
+7. Region 19 Pitcher Statistics 2024-25 is pitcher data for each school in Region 19 of the NJCAA (JUCO). This data was manually compiled from The Baseball Cube. The data was compiled and downloaded November 16th, 2026. The link is: [Region 19 Pitcher Statistics 2024-25](https://www.thebaseballcube.com/content/college_summary/2025~NJCAA-Reg19/). The data was compiled in the same manner as Region 19 Pitcher Statistics 2023-24.
 
 # How do I run it?
 
