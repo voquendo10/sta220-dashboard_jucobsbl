@@ -120,4 +120,14 @@ dim(njac_pitchers_2025_2026)
 names(njac_pitchers_2025_2026)
 summary(njac_pitchers_2025_2026)
 
+# ==============================================================================
+# Combine Region 19 NJCAA Data
+# ==============================================================================
+njcaa_pitchers_2023_2025 <- njcaa_23_24 |> bind_rows(njcaa_24_25)
+
+# three checks
+dim(njcaa_pitchers_2023_2025)
+names(njcaa_pitchers_2023_2025)
+summary(njcaa_pitchers_2023_2025)
+
 
