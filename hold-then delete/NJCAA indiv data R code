@@ -1,0 +1,84 @@
+# Import NJCAA individual data -------------------------------------------------
+# missing several njcaa schools baseball stats (not a result of data collection, but of actual missing data)
+njcaa_players_2024_2025 <- read_csv("data/njcaa_2024_2025_pitching_11-3-2026.csv")
+
+# three checks
+dim(njcaa_players_2024_2025)
+names(njcaa_players_2024_2025)
+summary(njcaa_players_2024_2025)
+
+# NJCAA data last 3 years
+njcaa_players_3yr <- read_csv("data/NJCAA_3_Years_Pitching.csv")
+
+# three checks
+dim(njcaa_players_3yr)
+names(njcaa_players_3yr)
+summary(njcaa_players_3yr)
+
+# clean njcaa table variable names to lower_snake_case
+names(njcaa_players_2024_2025) <- names(njcaa_players_2024_2025) |>
+  str_to_lower() |>
+  str_replace_all("\\s+", "_")
+
+names(njcaa_players_3yr) <- names(njcaa_players_3yr) |>
+  str_to_lower() |>
+  str_replace_all("\\s+", "_")
+
+# three checks
+dim(njcaa_players_3yr)
+names(njcaa_players_3yr)
+summary(njcaa_players_3yr)
+
+--------------------------------------------------------------------------------
+# ==============================================================================
+# Join NJAC pitchers with NJCAA Players to find Transfers
+# ==============================================================================
+# clean names to create a key
+njcaa_prep <- njcaa_players_3yr |>
+  mutate(clean_name = str_remove_all(str_to_lower(str_squish(player)), "\\."), .after = player)
+
+# select wanted columns (same names as njac table)
+njcaa_prep <- njcaa_prep |>
+  select(
+    athlete_id = player_id,
+    clean_name,
+    juco_year = season,
+    school = team,
+    innings_pitched = ip,
+    era,
+    wins = w,
+    loses = l,
+    saves = sv,
+    strikeouts = so
+  )
+
+njac_prep <- njac_pitchers_2025_2026 |>
+  mutate(clean_name = str_to_lower(str_squish(paste(first_name, last_name))), .after = last_name)
+
+# === check 2 - anti joins ===
+njcaa_prep |> anti_join(njac_prep, by = "clean_name") # players in NJCAA from 2022-2023 to 2024-2025 who are not on a NJAC roster in 2025-2026
+njac_prep |> anti_join(njcaa_prep, by = "clean_name") # players in NJAC who did not play in NJCAA in any of the 3 seasons prior to 2025-2026
+
+# === inner join to find transfers ===
+transfers <- njcaa_prep |>
+  inner_join(
+    njac_prep,
+    join_by(clean_name),
+    suffix = c("_njcaa", "_njac")
+  )
+
+# three checks
+dim(transfers)
+names(transfers)
+summary(transfers)
+
+--------------------------------------------------------------------------------
+# === add NJCU pitchers to NJAC pitcher data ===
+njac_pitchers_2025_2026 <- njac_pitchers_2025_2026 |>
+  bind_rows(njcu_pitchers_2025_2026)
+
+# expect 16 new rows -> 161 + 16 = 177 rows, 12 columns
+# three checks
+dim(njac_pitchers_2025_2026)
+names(njac_pitchers_2025_2026)
+summary(njac_pitchers_2025_2026)
