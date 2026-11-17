@@ -66,6 +66,8 @@ college_scorecard_njac <- college_scorecard_njac |>
 # check names
 names(college_scorecard_njac)
 
+write_csv(college_scorecard_njac, "app/data/college_scorecard_njac.csv")
+
 # ==============================================================================
 # Join Individual Player Data Sets
 # ==============================================================================
@@ -120,10 +122,14 @@ dim(njac_pitchers_2025_2026)
 names(njac_pitchers_2025_2026)
 summary(njac_pitchers_2025_2026)
 
+write_csv(njac_pitchers_2025_2026, "app/data/njac_pitchers_2025_2026.csv")
+
 # ==============================================================================
 # Combine Region 19 NJCAA Data
 # ==============================================================================
 njcaa_pitchers_2023_2025 <- njcaa_23_24 |> bind_rows(njcaa_24_25)
+
+write_csv(njcaa_pitchers_2023_2025, "app/data/njcaa_pitchers_2023_2025.csv")
 
 # three checks
 dim(njcaa_pitchers_2023_2025)
