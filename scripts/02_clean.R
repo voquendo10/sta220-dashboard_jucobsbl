@@ -79,7 +79,7 @@ indiv_stats |> count(athlete_id) |> filter(n > 1)         # returns 0 - athlete_
 
 # === check 2 - anti joins ===
 indiv_pitcher_info |> anti_join(indiv_stats, join_by(athlete_id)) # returns 18 - on the roster, but no stats (injured, doesn't meet grade requirements, etc.)
-indiv_stats |> anti_join(indiv_pitcher_info, join_by(athlete_id)) # returns 27,327 - pitcher_info table is only njac players, all 27,327 players are outside the njac!
+indiv_stats |> anti_join(indiv_pitcher_info, join_by(athlete_id)) # returns 27,327 - pitcher_info table is only NJAC players, all 27,327 players are outside the NJAC!
 
 # === left join stats (right table) to info (left table) by athlete_id ===
 # expect 161 rows, 45 columns (some columns will repeat (col.x, col.y))
