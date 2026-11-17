@@ -25,7 +25,7 @@ This repository contains 5 folders.
 1. The data folder contains all data used in the scripts as .csv files.
 2. The scripts folder contains each script used in this project to develop the dashboard.
 3. The output folder contains all visualizations created from the scripts as .png files.
-4. The library folder contains the PDF codebook for the College Scorecard data.
+4. The library folder contains the PDF codebooks for data, including College Scorecard and The Baseball Cube
 5. The hold-then delete contains all files that would be deleted, but kept just in case.
 
 # Who made it, and when was it last updated?
