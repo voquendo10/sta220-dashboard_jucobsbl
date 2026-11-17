@@ -51,11 +51,30 @@ summary(njcu_pitchers_2025_2026)
 
 
 
-# Import All NJAC Pitching Totals ----------------------------------------------
+# Import NJAC pitching totals --------------------------------------------------
 njac_pitching_totals <- read_csv("data/pitching_totals_11-2-2026.csv")
 
 # three checks
 dim(njac_pitching_totals)
 names(njac_pitching_totals)
 summary(njac_pitching_totals)
+
+
+
+# Import NJCAA Region 19 data --------------------------------------------------
+# 23-24 season
+njcaa_23_24 <- read_csv("data/region_19_23-24_11-16-2026.csv")
+
+# three checks
+dim(njcaa_23_24)
+names(njcaa_23_24)
+summary(njcaa_23_24)
+
+# 24-25 season
+njcaa_24_25 <- read_csv("data/region_19_24-25_11-16-2026.csv")
+
+# three checks
+dim(njcaa_24_25)
+names(njcaa_24_25)
+summary(njcaa_24_25)
 
