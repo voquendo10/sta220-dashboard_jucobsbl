@@ -3,7 +3,8 @@
 # ==============================================================================
 
 # un-comment install.packages() to download packages
-# install.packages("shiny")
+# install.packages(c("tidyverse","shiny"))
+library(tidyverse)
 library(shiny)
 
 # ==============================================================================
