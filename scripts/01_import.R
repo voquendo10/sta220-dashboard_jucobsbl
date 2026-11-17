@@ -58,6 +58,8 @@ dim(njac_pitching_totals)
 names(njac_pitching_totals)
 summary(njac_pitching_totals)
 
+write_csv(njac_pitching_totals, "app/data/njac_pitching_totals.csv")
+
 
 
 # Import NJCAA Region 19 data --------------------------------------------------
