@@ -23,7 +23,6 @@ summary(college_scorecard)
 
 
 
-
 # Import NCAA individual data --------------------------------------------------
 # expect 27470 rows, 25 columns
 indiv_stats <- read_csv("data/individual_stats_11-2-2026.csv")
@@ -41,6 +40,7 @@ dim(indiv_pitcher_info)
 names(indiv_pitcher_info)
 summary(indiv_pitcher_info)
 
+# missing NJCU pitchers Will be added to NJAC data
 # expect 16 rows, 12 columns
 njcu_pitchers_2025_2026 <- read_csv("data/njcu_pitchers_2025-2026_11-9-2026.csv")
 
@@ -48,39 +48,6 @@ njcu_pitchers_2025_2026 <- read_csv("data/njcu_pitchers_2025-2026_11-9-2026.csv"
 dim(njcu_pitchers_2025_2026)
 names(njcu_pitchers_2025_2026)
 summary(njcu_pitchers_2025_2026)
-
-
-
-# Import NJCAA individual data -------------------------------------------------
-# missing several njcaa schools baseball stats (not a result of data collection, but of actual missing data)
-njcaa_players_2024_2025 <- read_csv("data/njcaa_2024_2025_pitching_11-3-2026.csv")
-
-# three checks
-dim(njcaa_players_2024_2025)
-names(njcaa_players_2024_2025)
-summary(njcaa_players_2024_2025)
-
-# NJCAA data last 3 years
-njcaa_players_3yr <- read_csv("data/NJCAA_3_Years_Pitching.csv")
-
-# three checks
-dim(njcaa_players_3yr)
-names(njcaa_players_3yr)
-summary(njcaa_players_3yr)
-
-# clean njcaa table variable names to lower_snake_case
-names(njcaa_players_2024_2025) <- names(njcaa_players_2024_2025) |>
-  str_to_lower() |>
-  str_replace_all("\\s+", "_")
-
-names(njcaa_players_3yr) <- names(njcaa_players_3yr) |>
-  str_to_lower() |>
-  str_replace_all("\\s+", "_")
-
-# three checks
-dim(njcaa_players_3yr)
-names(njcaa_players_3yr)
-summary(njcaa_players_3yr)
 
 
 
