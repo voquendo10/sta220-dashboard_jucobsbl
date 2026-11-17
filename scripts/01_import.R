@@ -3,10 +3,9 @@
 # ==============================================================================
 
 # un-comment install.packages() to download packages
-# install.packages(c("tidyverse", "sf"))
+# install.packages("tidyverse")
 
 library(tidyverse)
-library(sf)
 
 # ==============================================================================
 # Import Data
