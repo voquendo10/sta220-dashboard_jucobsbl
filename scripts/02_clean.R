@@ -130,4 +130,30 @@ dim(njcaa_pitchers_2023_2025)
 names(njcaa_pitchers_2023_2025)
 summary(njcaa_pitchers_2023_2025)
 
+# create prep table with clean player names
+njcaa_prep <- njcaa_pitchers_2023_2025 |>
+  mutate(
+    clean_name = str_to_lower(player) |>
+      str_squish() |>
+      str_remove_all("\\."),
+    .after = player
+  )
+
+# create prep table with clean player names
+njac_prep <- njac_pitchers_2025_2026 |>
+  mutate(
+    clean_name = paste(first_name, last_name) |>
+      str_to_lower() |>
+      str_squish() |>
+      str_remove_all("\\."),
+    .after = last_name
+  )
+
+# anti_joins
+
+
+# join prep tables to find transfers
+
+
+
 
