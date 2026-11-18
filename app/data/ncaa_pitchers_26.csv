@@ -1,4 +1,4 @@
-athlete_id,first_name.x,last_name.x,season,division,conference,school,position_raw,position_group,class_year_raw,class_standing,gp,gs,ab,r,h,doubles,triples,hr,rbi,tb,bb,so,sb,sb_att,avg,ip,era,w,l,sv,k,app
+athlete_id,first_name_info,last_name_info,season,division,conference,school,position_raw,position_group,class_year_raw,class_standing,gp,gs,ab,r,h,doubles,triples,hr,rbi,tb,bb,so,sb,sb_att,avg,ip,era,w,l,sv,k,app
 bb_f0d22448a48f,Brady,Errecart,2026,D1,Atlantic Coast Conference,California,INF,Infield,Fr.,Fr,17,13,48,7,10,1,0,0,2,11,4,10,4,4,0.208,NA,NA,NA,NA,NA,NA,NA
 bb_bf21a0126dba,Cade,Campbell,2026,D1,Atlantic Coast Conference,California,INF,Infield,Sr.,Sr,55,55,211,28,56,9,0,6,22,83,17,46,4,5,0.265,NA,NA,NA,NA,NA,NA,NA
 bb_89dd4ee01dc3,Hideki,Prather,2026,D1,Atlantic Coast Conference,California,C,Catcher,Jr.,Jr,52,52,204,48,68,17,1,14,46,129,26,40,5,8,0.333,NA,NA,NA,NA,NA,NA,NA
