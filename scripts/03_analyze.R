@@ -42,7 +42,15 @@ ggsave("output/net_price_vs_5yr_earn.png", plot = p1)
 # ------------------------------------------------------------------------------
 
 # ==============================================================================
-# Strikeout to Walk Ratio
+# Number of Transfer per Division
 # ==============================================================================
 
-# 1. Plot the ratio, with a regression line
+ggplot(transfers |> filter(division == "D1"), aes(y = school.y)) + 
+  geom_bar() +
+  scale_x_continuous(limits = c(0, 20))
+
+
+
+
+
+
