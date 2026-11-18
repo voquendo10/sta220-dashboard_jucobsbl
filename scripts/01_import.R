@@ -39,15 +39,6 @@ dim(ncaa_info)
 names(ncaa_info)
 summary(ncaa_info)
 
-# missing NJCU pitchers Will be added to NJAC data
-# expect 16 rows, 12 columns
-njcu_pitchers <- read_csv("data/njcu_pitchers_2025-2026_11-9-2026.csv")
-
-# three checks
-dim(njcu_pitchers)
-names(njcu_pitchers)
-summary(njcu_pitchers)
-
 
 
 # Import NJAC pitching totals --------------------------------------------------
