@@ -42,29 +42,6 @@ ggsave("output/net_price_vs_5yr_earn.png", plot = p1)
 # ------------------------------------------------------------------------------
 
 # ==============================================================================
-# Team-Level NJAC Pitching Stats
-# ==============================================================================
-# 1. Get ERA of NJAC (Total NJAC earned runs * 9 / total NJAC innings pitched)
-njac_era <- (sum(njac_pitching_totals$er) * 9) / sum(njac_pitching_totals$ip)
-
-# 2. Create bar chart of each team ERA, with NJAC ERA
-p2 <- ggplot(njac_pitching_totals, aes(x = era, y = fct_rev(fct_reorder(school, era)))) +
-  # create the bar chart
-  geom_col() +
-  # add vertical line of avg era of njac
-  geom_vline(xintercept = njac_era, linetype = "dashed") +
-  labs(
-    title = "Kean, Rowan, Montclair State Among the Best Team Pitching Staff across the NJAC",
-    subtitle = "Dashed line represents conference average ERA",
-    x = "Team Earned Run Average (ERA)",
-    y = "NJAC School",
-    caption = "Source: The Baseball Cube"
-  ) +
-  theme_minimal()
-
-ggsave("output/team_era_njac.png", plot = p2)
-
-# ==============================================================================
 # Strikeout to Walk Ratio
 # ==============================================================================
 
