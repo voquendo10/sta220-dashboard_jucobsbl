@@ -76,15 +76,24 @@ dim(ncaa_pitchers_26)
 names(ncaa_pitchers_26)
 summary(ncaa_pitchers_26)
 
-# === add NJCU pitchers to NJAC pitcher data ===
+# deselect certain columns
 ncaa_pitchers_26 <- ncaa_pitchers_26 |>
-  bind_rows(njcu_pitchers)
-
-# expect 16 new rows -> 161 + 16 = 177 rows, 12 columns
-# three checks
-dim(ncaa_pitchers_26)
-names(ncaa_pitchers_26)
-summary(ncaa_pitchers_26)
+  select(
+    -c(
+      first_name.y,
+      last_name.y,
+      sport,
+      athletic_year,
+      gender,
+      hometown_raw,
+      hometown_city,
+      hometown_state,
+      origin,
+      high_school,
+      high_school_is_academy,
+      source_url
+    )
+  )
 
 write_csv(ncaa_pitchers_26, "app/data/ncaa_pitchers_26.csv")
 
