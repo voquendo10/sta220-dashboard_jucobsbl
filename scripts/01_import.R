@@ -24,29 +24,29 @@ summary(college_scorecard)
 
 # Import NCAA individual data --------------------------------------------------
 # expect 27470 rows, 25 columns
-indiv_stats <- read_csv("data/individual_stats_11-2-2026.csv")
+ncaa_stats <- read_csv("data/individual_stats_11-2-2026.csv")
 
 # three checks
-dim(indiv_stats)
-names(indiv_stats)
-summary(indiv_stats)
+dim(ncaa_stats)
+names(ncaa_stats)
+summary(ncaa_stats)
 
 # expect 161 rows, 21 columns
-indiv_pitcher_info <- read_csv("data/individual_info_11-17-2026.csv") # data set did not include NJCU
+ncaa_info <- read_csv("data/individual_info_11-17-2026.csv") # data set did not include NJCU
 
 # three checks
-dim(indiv_pitcher_info)
-names(indiv_pitcher_info)
-summary(indiv_pitcher_info)
+dim(ncaa_info)
+names(ncaa_info)
+summary(ncaa_info)
 
 # missing NJCU pitchers Will be added to NJAC data
 # expect 16 rows, 12 columns
-njcu_pitchers_2025_2026 <- read_csv("data/njcu_pitchers_2025-2026_11-9-2026.csv")
+njcu_pitchers <- read_csv("data/njcu_pitchers_2025-2026_11-9-2026.csv")
 
 # three checks
-dim(njcu_pitchers_2025_2026)
-names(njcu_pitchers_2025_2026)
-summary(njcu_pitchers_2025_2026)
+dim(njcu_pitchers)
+names(njcu_pitchers)
+summary(njcu_pitchers)
 
 
 
@@ -64,18 +64,18 @@ write_csv(njac_pitching_totals, "app/data/njac_pitching_totals.csv")
 
 # Import NJCAA Region 19 data --------------------------------------------------
 # 23-24 season
-njcaa_23_24 <- read_csv("data/region_19_23-24_11-16-2026.csv")
+njcaa_24 <- read_csv("data/region_19_23-24_11-16-2026.csv")
 
 # three checks
-dim(njcaa_23_24)
-names(njcaa_23_24)
-summary(njcaa_23_24)
+dim(njcaa_24)
+names(njcaa_24)
+summary(njcaa_24)
 
 # 24-25 season
-njcaa_24_25 <- read_csv("data/region_19_24-25_11-16-2026.csv")
+njcaa_25 <- read_csv("data/region_19_24-25_11-16-2026.csv")
 
 # three checks
-dim(njcaa_24_25)
-names(njcaa_24_25)
-summary(njcaa_24_25)
+dim(njcaa_25)
+names(njcaa_25)
+summary(njcaa_25)
 
