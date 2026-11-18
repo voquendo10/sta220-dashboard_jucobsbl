@@ -2,11 +2,8 @@
 # Narrowing College Scorecard
 # ==============================================================================
 
-# check dimensions
-dim(college_scorecard_njac)
-
 # select necessary columns =============================
-college_scorecard_njac <- college_scorecard_njac |>
+college_scorecard <- college_scorecard |>
   select(
     # Institutional Context
     unit_id            = UNITID,         # The unique 6-digit federal identification number assigned to each postsecondary institution in IPEDS.
@@ -50,61 +47,65 @@ college_scorecard_njac <- college_scorecard_njac |>
   )
 
 # check names
-names(college_scorecard_njac)
+names(college_scorecard)
 
-write_csv(college_scorecard_njac, "app/data/college_scorecard_njac.csv")
+write_csv(college_scorecard, "app/data/college_scorecard.csv")
 
 # ==============================================================================
 # Join Individual Player Data Sets
 # ==============================================================================
 # === check 1 - key verification ===
-names(indiv_pitcher_info)
-names(indiv_stats)
+names(ncaa_info)
+names(ncaa_stats)
 
 # must both be 0 in order for athlete_id to be a key
-indiv_pitcher_info |> count(athlete_id) |> filter(n > 1)  # returns 0 - athlete_id is a key!
-indiv_stats |> count(athlete_id) |> filter(n > 1)         # returns 0 - athlete_id is a key!
+ncaa_info |> count(athlete_id) |> filter(n > 1)  # returns 0 - athlete_id is a key!
+ncaa_stats |> count(athlete_id) |> filter(n > 1)         # returns 0 - athlete_id is a key!
 
 # === check 2 - anti joins ===
-indiv_pitcher_info |> anti_join(indiv_stats, join_by(athlete_id)) # returns 18 - on the roster, but no stats (injured, doesn't meet grade requirements, etc.)
-indiv_stats |> anti_join(indiv_pitcher_info, join_by(athlete_id)) # returns 27,327 - pitcher_info table is only NJAC players, all 27,327 players are outside the NJAC!
+ncaa_info |> anti_join(ncaa_stats, join_by(athlete_id)) # returns 18 - on the roster, but no stats (injured, doesn't meet grade requirements, etc.)
+ncaa_stats |> anti_join(ncaa_info, join_by(athlete_id)) # returns 27,327 - pitcher_info table is only NJAC players, all 27,327 players are outside the NJAC!
 
 # === left join stats (right table) to info (left table) by athlete_id ===
 # expect 161 rows, 45 columns (some columns will repeat (col.x, col.y))
-njac_pitchers_2025_2026 <- indiv_pitcher_info |>
-  left_join(indiv_stats, by = "athlete_id")
+ncaa_pitchers_26 <- ncaa_info |>
+  left_join(ncaa_stats, by = "athlete_id")
 
 # three checks
-dim(njac_pitchers_2025_2026)
-names(njac_pitchers_2025_2026)
-summary(njac_pitchers_2025_2026)
+dim(ncaa_pitchers_26)
+names(ncaa_pitchers_26)
+summary(ncaa_pitchers_26)
 
 # === add NJCU pitchers to NJAC pitcher data ===
-njac_pitchers_2025_2026 <- njac_pitchers_2025_2026 |>
-  bind_rows(njcu_pitchers_2025_2026)
+ncaa_pitchers_26 <- ncaa_pitchers_26 |>
+  bind_rows(njcu_pitchers)
 
 # expect 16 new rows -> 161 + 16 = 177 rows, 12 columns
 # three checks
-dim(njac_pitchers_2025_2026)
-names(njac_pitchers_2025_2026)
-summary(njac_pitchers_2025_2026)
+dim(ncaa_pitchers_26)
+names(ncaa_pitchers_26)
+summary(ncaa_pitchers_26)
 
-write_csv(njac_pitchers_2025_2026, "app/data/njac_pitchers_2025_2026.csv")
+write_csv(ncaa_pitchers_26, "app/data/ncaa_pitchers_26.csv")
 
 # ==============================================================================
 # Combine Region 19 NJCAA Data
 # ==============================================================================
-njcaa_pitchers_2023_2025 <- njcaa_23_24 |> bind_rows(njcaa_24_25)
+njcaa_24_25 <- njcaa_24 |> bind_rows(njcaa_25)
 
-write_csv(njcaa_pitchers_2023_2025, "app/data/njcaa_pitchers_2023_2025.csv")
+write_csv(njcaa_24_25, "app/data/njcaa_24_25.csv")
 
 # three checks
-dim(njcaa_pitchers_2023_2025)
-names(njcaa_pitchers_2023_2025)
-summary(njcaa_pitchers_2023_2025)
+dim(njcaa_24_25)
+names(njcaa_24_25)
+summary(njcaa_24_25)
+
+# ==============================================================================
+# Join NJCAA and NCAA to Find Transfers
+# ==============================================================================
 
 # create prep table with clean player names
-njcaa_prep <- njcaa_pitchers_2023_2025 |>
+njcaa_prep <- njcaa_24_25 |>
   mutate(
     clean_name = str_to_lower(player) |>
       str_squish() |>
@@ -113,9 +114,9 @@ njcaa_prep <- njcaa_pitchers_2023_2025 |>
   )
 
 # create prep table with clean player names
-njac_prep <- njac_pitchers_2025_2026 |>
+ncaa_prep <- ncaa_pitchers_26 |>
   mutate(
-    clean_name = paste(first_name, last_name) |>
+    clean_name = paste(first_name.x, last_name.x) |>
       str_to_lower() |>
       str_squish() |>
       str_remove_all("\\."),
@@ -126,7 +127,6 @@ njac_prep <- njac_pitchers_2025_2026 |>
 
 
 # join prep tables to find transfers
-
 
 
 
