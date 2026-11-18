@@ -60,7 +60,7 @@ names(ncaa_stats)
 
 # must both be 0 in order for athlete_id to be a key
 ncaa_info |> count(athlete_id) |> filter(n > 1)  # returns 0 - athlete_id is a key!
-ncaa_stats |> count(athlete_id) |> filter(n > 1)         # returns 0 - athlete_id is a key!
+ncaa_stats |> count(athlete_id) |> filter(n > 1) # returns 0 - athlete_id is a key!
 
 # === check 2 - anti joins ===
 ncaa_info |> anti_join(ncaa_stats, join_by(athlete_id)) # returns 18 - on the roster, but no stats (injured, doesn't meet grade requirements, etc.)
@@ -110,7 +110,7 @@ njcaa_prep <- njcaa_24_25 |>
     clean_name = str_to_lower(player) |>
       str_squish() |>
       str_remove_all("\\."),
-    .after = player
+    .before = 1
   )
 
 # create prep table with clean player names
@@ -120,13 +120,15 @@ ncaa_prep <- ncaa_pitchers_26 |>
       str_to_lower() |>
       str_squish() |>
       str_remove_all("\\."),
-    .after = last_name
+    .before = 1
   )
 
 # anti_joins
-
+# === check 2 - anti joins ===
+njcaa_prep |> anti_join(ncaa_prep, join_by(clean_name)) # did not transfer to NCAA for '26 OR maybe
+                                                        # 24 -> 25 transfer & not active for 26
+ncaa_prep |> anti_join(njcaa_prep, join_by(clean_name)) # same as before, not a transfer for 26
 
 # join prep tables to find transfers
-
-
+transfers <- njcaa_prep |> inner_join(ncaa_prep, by = "clean_name")
 
