@@ -32,7 +32,7 @@ names(indiv_stats)
 summary(indiv_stats)
 
 # expect 161 rows, 21 columns
-indiv_pitcher_info <- read_csv("data/individual_info_11-2-2026.csv") # data set did not include NJCU
+indiv_pitcher_info <- read_csv("data/individual_info_11-17-2026.csv") # data set did not include NJCU
 
 # three checks
 dim(indiv_pitcher_info)
