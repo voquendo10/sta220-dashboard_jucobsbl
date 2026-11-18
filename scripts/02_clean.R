@@ -1,20 +1,6 @@
 # ==============================================================================
 # Narrowing College Scorecard
 # ==============================================================================
-# filter only baseball NJAC colleges/universities ==============================
-# expect 10 rows, 3379 columns
-college_scorecard_njac <- college_scorecard |> 
-  filter(INSTNM %in% c("Rowan University",
-                       "Rutgers University-Camden",
-                       "Rutgers University-Newark",
-                       "Montclair State University",
-                       "The College of New Jersey",
-                       "Kean University",
-                       "Stockton University",
-                       "William Paterson University of New Jersey",
-                       "Ramapo College of New Jersey",
-                       "New Jersey City University")
-  )
 
 # check dimensions
 dim(college_scorecard_njac)
@@ -92,25 +78,6 @@ njac_pitchers_2025_2026 <- indiv_pitcher_info |>
 dim(njac_pitchers_2025_2026)
 names(njac_pitchers_2025_2026)
 summary(njac_pitchers_2025_2026)
-
-# select wanted columns
-njac_pitchers_2025_2026 <- njac_pitchers_2025_2026 |>
-  select(
-    athlete_id,
-    first_name = first_name.x,
-    last_name = last_name.x,
-    njac_year = athletic_year,
-    conference,
-    school,
-    innings_pitched = ip,
-    era,
-    wins = w,
-    loses = l,
-    saves = sv,
-    strikeouts = k
-  )
-
-names(njac_pitchers_2025_2026)
 
 # === add NJCU pitchers to NJAC pitcher data ===
 njac_pitchers_2025_2026 <- njac_pitchers_2025_2026 |>
