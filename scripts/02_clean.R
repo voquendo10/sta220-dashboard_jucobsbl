@@ -69,7 +69,7 @@ ncaa_stats |> anti_join(ncaa_info, join_by(athlete_id)) # returns 27,327 - pitch
 # === left join stats (right table) to info (left table) by athlete_id ===
 # expect 161 rows, 45 columns (some columns will repeat (col.x, col.y))
 ncaa_pitchers_26 <- ncaa_info |>
-  left_join(ncaa_stats, by = "athlete_id")
+  left_join(ncaa_stats, by = "athlete_id", suffix = c("_info", "_stats"))
 
 # three checks
 dim(ncaa_pitchers_26)
@@ -80,8 +80,8 @@ summary(ncaa_pitchers_26)
 ncaa_pitchers_26 <- ncaa_pitchers_26 |>
   select(
     -c(
-      first_name.y,
-      last_name.y,
+      first_name_stats,
+      last_name_stats,
       sport,
       athletic_year,
       gender,
@@ -125,7 +125,7 @@ njcaa_prep <- njcaa_24_25 |>
 # create prep table with clean player names
 ncaa_prep <- ncaa_pitchers_26 |>
   mutate(
-    clean_name = paste(first_name.x, last_name.x) |>
+    clean_name = paste(first_name_info, last_name_info) |>
       str_to_lower() |>
       str_squish() |>
       str_remove_all("\\."),
