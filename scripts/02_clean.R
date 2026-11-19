@@ -144,3 +144,5 @@ transfers <- njcaa_prep |> inner_join(ncaa_prep, by = "clean_name")
 # shows players who are listed more than once. players with 2 occurences played 2 juco seasons. both seasons are being matched to their transfer
 # players with 4 occurences are listed playing for 2 different ncaa teams in 2026
 transfers |> count(clean_name) |> filter(n > 1)
+
+write_csv(transfers, "app/data/transfers.csv")
