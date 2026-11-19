@@ -42,10 +42,10 @@ ggsave("output/net_price_vs_5yr_earn.png", plot = p1)
 # ------------------------------------------------------------------------------
 
 # ==============================================================================
-# Number of Transfer per Division
+# Number of Transfer per Division (NCAA)
 # ==============================================================================
 
-ggplot(transfers |> filter(division == "D1"), aes(y = school.y)) + 
+ggplot(transfers |> filter(division == "D1"), aes(y = school_ncaa)) + 
   geom_bar() +
   scale_x_continuous(limits = c(0, 20))
 
