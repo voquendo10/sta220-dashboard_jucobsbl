@@ -139,7 +139,7 @@ njcaa_prep |> anti_join(ncaa_prep, join_by(clean_name)) # did not transfer to NC
 ncaa_prep |> anti_join(njcaa_prep, join_by(clean_name)) # same as before, not a transfer for 26
 
 # join prep tables to find transfers
-transfers <- njcaa_prep |> inner_join(ncaa_prep, by = "clean_name")
+transfers <- njcaa_prep |> inner_join(ncaa_prep, by = "clean_name", suffix = c("_juco", "_ncaa"))
 
 # shows players who are listed more than once. players with 2 occurences played 2 juco seasons. both seasons are being matched to their transfer
 # players with 4 occurences are listed playing for 2 different ncaa teams in 2026
