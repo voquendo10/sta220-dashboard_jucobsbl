@@ -10,7 +10,7 @@ library(shiny)
 # ==============================================================================
 # Importing Clean Data
 # ==============================================================================
-
+transfers <- read_csv("data/transfers.csv")
 
 # ==============================================================================
 # User Interface
@@ -23,7 +23,7 @@ ui <- fluidPage(
   p("For: JUCO Pitchers preparing to trasnfer to a 4-year university"),
   p("The decision: Pick the NJAC school that fits you most"),
   
-  selectInput(inputId = "pick", label = "Pick one:", choices = c("choice 1", "choice 2")),
+  selectInput(inputId = "pick", label = "Pick one:", choices = transfers |> distinct(division) |> pull()),
   
   h3("Figure 1. title"),
   plotOutput(outputId = "fig_1"),
@@ -42,7 +42,14 @@ server <- function(input, output) {
   
   output$fig_1 <- renderPlot({
     
-    ggplot()     # replace with your code for Figure 1
+    ggplot(transfers |> filter(division == input$pick), aes(y = school_ncaa)) + 
+      geom_bar() +
+      labs(
+        title = "Transfer Pitcher Count for each NCAA University in 2026",
+        x = "Number of Transfers",
+        y = "University",
+        caption = "Source: Hugging Face"
+      )
     
   })
   
