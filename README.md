@@ -17,7 +17,7 @@ This project contains several different data sources.
 6. Region 19 Pitcher Statistics 2024-25 is pitcher data for each school in Region 19 of the NJCAA (JUCO). This data was manually compiled from The Baseball Cube. The data was compiled and downloaded November 16th, 2026. The link is: [Region 19 Pitcher Statistics 2024-25](https://www.thebaseballcube.com/content/college_summary/2025~NJCAA-Reg19/). The data was compiled in the same manner as Region 19 Pitcher Statistics 2023-24.
 
 # How do I run it?
-
+Open the scripts/ folder and run each file in order. This means 01 first, then 02, then 03, and so on. Each script that uses packages list them at the top of the script. If the script used is not installed on your machine, un comment the install.packages() method to download the packages.
 
 # What is in each folder?
 This repository contains 5 folders.
