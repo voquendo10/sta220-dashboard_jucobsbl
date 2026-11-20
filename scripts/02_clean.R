@@ -68,16 +68,16 @@ ncaa_stats |> anti_join(ncaa_info, join_by(athlete_id)) # returns 27,327 - pitch
 
 # === left join stats (right table) to info (left table) by athlete_id ===
 # expect 161 rows, 45 columns (some columns will repeat (col.x, col.y))
-ncaa_pitchers_26 <- ncaa_info |>
+ncaa <- ncaa_info |>
   left_join(ncaa_stats, by = "athlete_id", suffix = c("_info", "_stats"))
 
 # three checks
-dim(ncaa_pitchers_26)
-names(ncaa_pitchers_26)
-summary(ncaa_pitchers_26)
+dim(ncaa)
+names(ncaa)
+summary(ncaa)
 
 # deselect certain columns
-ncaa_pitchers_26 <- ncaa_pitchers_26 |>
+ncaa <- ncaa |>
   select(
     -c(
       first_name_stats,
@@ -95,7 +95,7 @@ ncaa_pitchers_26 <- ncaa_pitchers_26 |>
     )
   )
 
-write_csv(ncaa_pitchers_26, "app/data/ncaa_pitchers_26.csv")
+write_csv(ncaa, "app/data/ncaa.csv")
 
 # ==============================================================================
 # Combine Region 19 NJCAA Data
