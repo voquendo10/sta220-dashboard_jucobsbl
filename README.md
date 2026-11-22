@@ -2,29 +2,49 @@
 This dashboard helps a Junior College (JUCO) baseball pitcher decide which public New Jersey Athletic Conference (NJAC) university to transfer to by comparing schools on both financial value (costs, financial aid, and post-graduate ROI) and athletic player development. By combining public institutional data with historical pitching statistics, it uncovers the hidden financial and on-field realities of each program to support a more informed transfer decision.
 
 # Where did the data come from?
+
 This project contains several different data sources.
-1. College Scorecard Institutional Data is all data files for 1996-97 through 2025-26 containing aggregate data for each institution in the United States. It is from the U.S. Department of Education. It was downloaded October 29th, 2026. This link is:  [College Scorecard Insitutional Data](https://collegescorecard.ed.gov/data)
-2. Pitcher Totals data is team-level data for each all 10 teams in the NJAC for the 2025-26 season. The data comes from The Baseball Cube, a long-running baseball statistics database tracking player, team, and league data across several levels of organized baseball. The data was downloaded November 2nd, 2026. The link is: [Pitching Totals](https://www.thebaseballcube.com/content/college_summary.asp?ID=2026~NJAC&view=totals#pitching)
-3. Individual Info data is athlete roster data for all NCAA players in the 2025-26 year. The data comes from Hugging Face (compiled by Dharit Shah, CC0 1.0 public domain license). The data is missing some schools, like NJCU, for example. The data was downloaded November 17th, 2026. The link is: [Individual Info](https://huggingface.co/datasets/dharits3/ncaa-college-athlete-rosters-2025-26/raw/main/by_sport/baseball/all.csv)
-4. Individual Stats data is athlete statistics for the NJAC 2025-26 year. The data comes from Hugging Face (compiled by Dharit Shah, CC0 1.0 public domain license). The data was downloaded November 2nd, 2026. The link is: [Individual Stats](https://huggingface.co/datasets/dharits3/ncaa-college-athlete-rosters-2025-26/raw/main/by_sport/baseball/stats.csv)
-5. Region 19 Pitcher Statistics 2023-24 is pitcher data for each school in Region 19 of the NJCAA (JUCO). This data was manually compiled from The Baseball Cube. The data was compiled and downloaded November 16th, 2026. The link is: [Region 19 Pitcher Statistics 2023-24](https://www.thebaseballcube.com/content/college_summary/2024~NJCAA-Reg19/). The data was compiled in the following manner:
+
+1. **College Scorecard Institutional Data** is all data files for 1996-97 through 2025-26 containing aggregate data for each institution in the United States. It is from the U.S. Department of Education. It was downloaded October 29th, 2026. This link is:  [College Scorecard Insitutional Data](https://collegescorecard.ed.gov/data)
+2. **Pitcher Totals Data** is team-level data for each all 10 teams in the NJAC for the 2025-26 season. The data comes from The Baseball Cube, a long-running baseball statistics database tracking player, team, and league data across several levels of organized baseball. The data was downloaded November 2nd, 2026. The link is: [Pitching Totals](https://www.thebaseballcube.com/content/college_summary.asp?ID=2026~NJAC&view=totals#pitching)
+3. **Individual Info Data** is athlete roster data for all NCAA players in the 2025-26 year. The data comes from Hugging Face (compiled by Dharit Shah, CC0 1.0 public domain license). The data is missing some schools, like NJCU, for example. The data was downloaded November 17th, 2026. The link is: [Individual Info](https://huggingface.co/datasets/dharits3/ncaa-college-athlete-rosters-2025-26/raw/main/by_sport/baseball/all.csv)
+4. **Individual Stats Data** is athlete statistics for the NJAC 2025-26 year. The data comes from Hugging Face (compiled by Dharit Shah, CC0 1.0 public domain license). The data was downloaded November 2nd, 2026. The link is: [Individual Stats](https://huggingface.co/datasets/dharits3/ncaa-college-athlete-rosters-2025-26/raw/main/by_sport/baseball/stats.csv)
+5. **Region 19 Pitcher Statistics 2023-24** is pitcher data for each school in Region 19 of the NJCAA (JUCO). This data was manually compiled from The Baseball Cube. The data was compiled and downloaded November 16th, 2026. The link is: [Region 19 Pitcher Statistics 2023-24](https://www.thebaseballcube.com/content/college_summary/2024~NJCAA-Reg19/). The data was compiled in the following manner:
     1. Click each school
     2. Scroll to "Pitching Statistics"
     3. Click "CSV"
     4. Copy the text into Notepad on windows
     5. Repeat for each school. Note: Only the first school included the header row. No school included the totals row
     6. Download the Notepad text as a .csv file
-6. Region 19 Pitcher Statistics 2024-25 is pitcher data for each school in Region 19 of the NJCAA (JUCO). This data was manually compiled from The Baseball Cube. The data was compiled and downloaded November 16th, 2026. The link is: [Region 19 Pitcher Statistics 2024-25](https://www.thebaseballcube.com/content/college_summary/2025~NJCAA-Reg19/). The data was compiled in the same manner as Region 19 Pitcher Statistics 2023-24.
+6. **Region 19 Pitcher Statistics 2024-25** is pitcher data for each school in Region 19 of the NJCAA (JUCO). This data was manually compiled from The Baseball Cube. The data was compiled and downloaded November 16th, 2026. The link is: [Region 19 Pitcher Statistics 2024-25](https://www.thebaseballcube.com/content/college_summary/2025~NJCAA-Reg19/). The data was compiled in the same manner as Region 19 Pitcher Statistics 2023-24.
 
 # How do I run it?
-Open the scripts/ folder and run each file in order. This means 01 first, then 02, then 03, and so on. Each script that uses packages list them at the top of the script. If the script used is not installed on your machine, un comment the install.packages() method to download the packages.
+
+##### Prerequisites
+
+- [R](https://cran.r-project.org/) and [RStudio](https://posit.co/download/rstudio-desktop/) installed on your machine.
+- Required R packages (listed at the top of each script—uncomment `install.packages(...)` on your first run if needed).
+
+##### Steps
+
+1. **Clone or download** this repository to your local machine.
+2. **Open the project** by double-clicking `sta220-dashboard_jucobsbl.Rproj` in RStudio. *(Opening the `.Rproj` file ensures all relative folder paths work correctly.)*
+3. **Run the data scripts in order:** Open the `scripts/` folder and run each file sequentially (`01`, `02`, `03`, etc.) to clean the datasets and generate the visualizations in `output/`.
 
 # What is in each folder?
-This repository contains 5 folders.
-1. The data folder contains all data used in the scripts as .csv files.
-2. The scripts folder contains each script used in this project to develop the dashboard.
-3. The output folder contains all visualizations created from the scripts as .png files.
-4. The library folder contains the PDF codebooks for data, including College Scorecard and The Baseball Cube
-5. The hold-then delete contains all files that would be deleted, but kept just in case.
+
+This repository contains 6 folders:
+
+1. `app/` — Contains the source files for the interactive dashboard application.
+2. `data/` — Contains all cleaned and raw datasets used in the project as `.csv` files.
+3. `scripts/` — Contains the R scripts used to clean data, run analyses, and build visualizations.
+4. `output/` — Contains all visualizations generated by the scripts as `.png` files.
+5. `library/` — Contains PDF data codebooks for reference, including College Scorecard and The Baseball Cube.
+6. `hold-then-delete/` — Contains archived or scratch files kept temporarily for backup.
 
 # Who made it, and when was it last updated?
+
+Created by **Victor Oquendo** ([@voquendo10](https://github.com/voquendo10)) for STA 220.
+
+- **Last updated:** November 2026
+- **License:** MIT License
