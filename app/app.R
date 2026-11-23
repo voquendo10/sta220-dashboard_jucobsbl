@@ -98,7 +98,7 @@ server <- function(input, output, session) {
       geom_vline(xintercept = so9_ncaa_med, linetype = "dashed") +
       labs(
         title = paste(input$pick_div, "-", input$pick_conf),
-        x = "Rate (per 9 Innings)",
+        x = "K/9 vs. ERA",
         y = "School",
         fill = "Metric"
       ) + 
