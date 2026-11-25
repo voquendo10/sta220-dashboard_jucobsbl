@@ -17,35 +17,55 @@ ncaa <- read_csv("data/ncaa.csv")
 # User Interface
 # ==============================================================================
 
-# Define UI for application that draws a histogram
+# creates the user interface
+# fluidPage is a container, allows resizing of the window
 ui <- fluidPage(
   
-  titlePanel("What NJAC School Should I Transfer To?"),
-  p("For: JUCO Pitchers preparing to transfer to a 4-year university"),
+  # title of the dashboard
+  titlePanel("What NCAA School Should I Transfer To?"),
+  
+  # paragraphs
+  p("Who this is for: JUCO Pitchers preparing to transfer to a 4-year university"),
   p("The decision: Pick the NJAC school that fits you most"),
   
+  # separates page into a small left side, and large right side
   sidebarLayout(
+    
+    # creates a panel that can hold input choices, like dropdown, slider, etc.
     sidebarPanel(
-      selectInput(inputId = "pick_div", 
-                  label = "1. Select Division:", 
-                  choices = sort(unique(ncaa$division)),
-                  selected = "D1"
+      
+      # creates a dropdown
+      selectInput(inputId = "pick_div",                    # name referenced to use the selection
+                  label = "1. Select Division:",           # what the audience sees
+                  choices = sort(unique(ncaa$division)),   # fills dropdown with unique division value in ncaa data
+                  selected = "D1"                          # defaults the dropdown selection to D1
       ),
-      selectInput(inputId = "pick_conf", 
-                  label = "2. Select Conference:", 
-                  choices = NULL
+      selectInput(inputId = "pick_conf",                   # name referenced to use the selection
+                  label = "2. Select Conference:",         # what the audience sees
+                  choices = NULL                           # starts the dropdown as empty
       )
     ),
     mainPanel(
+      
+      # holds a spot for the output. so9 is the outputId
       plotOutput("so9")
     )
   )
 )
 
+# input - list of inputs
+# output - list of outputs
+# session - connects the server to the browser. need to update ui elements from the server
 server <- function(input, output, session) {
   # filter ncaa by division
+  # reactive expression re-runs automatically when an input it uses changes
   ncaa_div <- reactive({
+    
+    # this expression requires division input. stop expression if no input given
+    # its a check
     req(input$pick_div)
+    
+    # filters ncaa data by division input
     ncaa |>
       filter(division == input$pick_div)
   })
@@ -93,7 +113,7 @@ server <- function(input, output, session) {
       summarize(so9_med = median(value, na.rm = TRUE)) |>
       pull(so9_med)
     
-    ggplot(plot_data, aes(x = value, y = school, fill = stat)) +
+    ggplot(plot_data, aes(x = value, y = reorder(school, value), fill = stat)) +
       geom_col(position = "dodge") + 
       geom_vline(xintercept = so9_ncaa_med, linetype = "dashed") +
       labs(
